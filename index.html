@@ -251,6 +251,65 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
 .foot-col a:hover{color:var(--orange)}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:54px;padding-top:26px;border-top:1px solid var(--line);color:var(--faint);font-size:.82rem;flex-wrap:wrap;gap:12px}
 
+/* ---------- modal ---------- */
+.modal-overlay{
+  position:fixed;inset:0;z-index:100;
+  background:oklch(0.08 0.005 50 / .88);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-top:3px solid var(--orange);
+  border-radius:8px;
+  padding:48px 44px;
+  width:100%;max-width:560px;
+  max-height:90vh;overflow-y:auto;
+  transform:translateY(24px);transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  position:relative;
+}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-close{
+  position:absolute;top:16px;right:18px;
+  background:none;border:none;color:var(--muted);
+  font-size:1.5rem;cursor:pointer;line-height:1;padding:8px;
+  transition:color .2s;
+}
+.modal-close:hover{color:var(--text)}
+.modal h3{font-family:'Anton';font-size:2rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:.4rem}
+.modal .modal-sub{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-group{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.2rem}
+.form-group label{font-weight:700;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.form-group input,
+.form-group select,
+.form-group textarea{
+  background:var(--bg-2);border:1px solid var(--line);border-radius:4px;
+  padding:.85rem 1rem;color:var(--text);
+  font-family:'Archivo',sans-serif;font-size:.98rem;
+  transition:border-color .2s;width:100%;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{outline:none;border-color:var(--orange)}
+.form-group select option{background:var(--bg-2)}
+.form-group textarea{resize:vertical;min-height:100px}
+.modal-msg{
+  padding:.9rem 1rem;border-radius:4px;
+  font-size:.92rem;font-weight:600;
+  display:none;margin-bottom:1.2rem;
+}
+.modal-msg.success{background:oklch(0.25 0.05 152);color:oklch(0.72 0.17 152);border:1px solid oklch(0.40 0.10 152);display:block}
+.modal-msg.error{background:oklch(0.22 0.05 20);color:oklch(0.72 0.17 20);border:1px solid oklch(0.40 0.08 20);display:block}
+@media(max-width:600px){
+  .modal{padding:32px 20px}
+  .form-row{grid-template-columns:1fr}
+}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -327,6 +386,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
     <div class="hero-actions rv in d3">
       <a href="#start" class="btn btn-orange">Start Training <span class="arw">→</span></a>
       <a href="#services" class="btn btn-ghost">View Services</a>
+      <button class="btn btn-ghost open-modal">Learn More <span class="arw">→</span></button>
     </div>
   </div>
   <figure class="hero-portrait rv in d2">
@@ -364,7 +424,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
         <li><span class="chk">»</span> Live form correction &amp; spotting</li>
         <li><span class="chk">»</span> Nutrition guidance &amp; weekly check-ins</li>
       </ul>
-      <a href="#start" class="more">Book a session <span class="arw">→</span></a>
+      <button class="more open-modal" style="background:none;border:none;cursor:pointer;padding:0">Book a session <span class="arw">→</span></button>
     </div>
 
     <div class="svc rv d2">
@@ -379,7 +439,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
         <li><span class="chk">»</span> Video form reviews &amp; messaging access</li>
         <li><span class="chk">»</span> Macro targets &amp; habit coaching</li>
       </ul>
-      <a href="#start" class="more">Apply now <span class="arw">→</span></a>
+      <button class="more open-modal" style="background:none;border:none;cursor:pointer;padding:0">Apply now <span class="arw">→</span></button>
     </div>
   </div>
 </section>
@@ -484,6 +544,55 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   </div>
 </section>
 
+<!-- INQUIRY MODAL -->
+<div class="modal-overlay" id="inquiryModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <h3 class="display" id="modalTitle">Let's <em style="font-style:normal;color:var(--orange)">Connect</em></h3>
+    <p class="modal-sub">Fill in your details and I'll get back to you within 24 hours.</p>
+    <div class="modal-msg" id="modalMsg"></div>
+    <form id="inquiryForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fieldFullName">Full Name *</label>
+          <input type="text" id="fieldFullName" name="fullName" placeholder="John Doe" required />
+        </div>
+        <div class="form-group">
+          <label for="fieldNickname">What should I call you?</label>
+          <input type="text" id="fieldNickname" name="nickname" placeholder="Johnny" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fieldGender">Gender</label>
+          <select id="fieldGender" name="gender">
+            <option value="">Select...</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fieldAge">Age</label>
+          <input type="number" id="fieldAge" name="age" placeholder="25" min="16" max="99" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="fieldContact">Contact (WhatsApp or Email) *</label>
+        <input type="text" id="fieldContact" name="contact" placeholder="+60 17 421 3318 or you@email.com" required />
+      </div>
+      <div class="form-group">
+        <label for="fieldInquiry">Tell me about your goal *</label>
+        <textarea id="fieldInquiry" name="inquiry" placeholder="What are you looking to achieve? Any injuries or constraints I should know about?" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-orange" style="width:100%;justify-content:center" id="submitBtn">
+        Send My Inquiry <span class="arw">→</span>
+      </button>
+    </form>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="shell">
@@ -563,6 +672,64 @@ function closeMenu() {
 burger.addEventListener('click', openMenu);
 mobileClose.addEventListener('click', closeMenu);
 document.querySelectorAll('.mm-link').forEach(a => a.addEventListener('click', closeMenu));
+
+// modal
+const modalOverlay = document.getElementById('inquiryModal');
+const modalClose = document.getElementById('modalClose');
+const inquiryForm = document.getElementById('inquiryForm');
+const modalMsg = document.getElementById('modalMsg');
+const submitBtn = document.getElementById('submitBtn');
+
+function openModal() {
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.open-modal').forEach(el => el.addEventListener('click', openModal));
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', e => { if (e.target === modalOverlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+inquiryForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = 'Sending...';
+  modalMsg.className = 'modal-msg';
+
+  const data = {
+    fullName: document.getElementById('fieldFullName').value,
+    nickname: document.getElementById('fieldNickname').value,
+    gender: document.getElementById('fieldGender').value,
+    age: document.getElementById('fieldAge').value,
+    contact: document.getElementById('fieldContact').value,
+    inquiry: document.getElementById('fieldInquiry').value,
+  };
+
+  try {
+    const res = await fetch('/.netlify/functions/submit-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (res.ok) {
+      modalMsg.textContent = "Your inquiry has been sent. I'll be in touch very soon!";
+      modalMsg.className = 'modal-msg success';
+      inquiryForm.reset();
+    } else {
+      throw new Error();
+    }
+  } catch {
+    modalMsg.textContent = 'Something went wrong. Please try again or contact me directly.';
+    modalMsg.className = 'modal-msg error';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send My Inquiry <span class="arw">→</span>';
+  }
+});
 </script>
 </body>
 </html>
