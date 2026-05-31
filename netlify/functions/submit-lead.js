@@ -43,7 +43,7 @@ exports.handler = async (event) => {
   if (!res.ok) {
     const err = await res.text();
     console.error('Airtable error:', err);
-    return { statusCode: 500, body: JSON.stringify({ error: 'Failed to save lead' }) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'Failed to save lead', detail: err }) };
   }
 
   return { statusCode: 200, body: JSON.stringify({ success: true }) };

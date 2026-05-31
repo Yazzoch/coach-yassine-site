@@ -720,10 +720,11 @@ inquiryForm.addEventListener('submit', async (e) => {
       modalMsg.className = 'modal-msg success';
       inquiryForm.reset();
     } else {
-      throw new Error();
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.detail || 'Server error');
     }
-  } catch {
-    modalMsg.textContent = 'Something went wrong. Please try again or contact me directly.';
+  } catch (err) {
+    modalMsg.textContent = 'Error: ' + (err.message || 'Unknown error');
     modalMsg.className = 'modal-msg error';
   } finally {
     submitBtn.disabled = false;
