@@ -17,7 +17,7 @@ exports.handler = async (event) => {
   }
 
   const res = await fetch(
-    `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Leads`,
+    `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/tblWTu19oGYpAt9wF`,
     {
       method: 'POST',
       headers: {
