@@ -177,10 +177,10 @@ section{position:relative}
 .band-label{position:absolute;left:22px;bottom:18px;z-index:3;font-family:'Anton';font-size:clamp(1.4rem,3vw,2.4rem);text-transform:uppercase;letter-spacing:.02em;color:var(--text);text-shadow:0 4px 30px rgba(0,0,0,.7)}
 
 /* ---------- services ---------- */
-.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:54px}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:54px}
 .svc{
   background:linear-gradient(165deg,var(--card) 0%,var(--bg-2) 100%);
-  border:1px solid var(--line);border-radius:6px;padding:42px 40px 38px;
+  border:1px solid var(--line);border-radius:6px;padding:32px 28px 28px;
   position:relative;overflow:hidden;transition:transform .3s,border-color .3s;
 }
 .svc::before{content:"";position:absolute;top:0;left:0;width:4px;height:0;background:var(--orange);transition:height .35s}
@@ -310,6 +310,57 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   .form-row{grid-template-columns:1fr}
 }
 
+/* ---------- service detail modals ---------- */
+.modal-lg{max-width:780px}
+.svc-modal-quote{
+  font-size:1rem;font-style:italic;color:var(--muted);
+  border-left:3px solid var(--orange);padding-left:1.2rem;
+  margin:1.2rem 0 1.8rem;line-height:1.7;
+}
+.svc-modal-includes{list-style:none;display:flex;flex-direction:column;gap:.65rem;margin-bottom:2rem}
+.svc-modal-includes li{display:flex;gap:.7rem;font-size:.95rem;align-items:flex-start}
+.svc-modal-includes .chk{color:var(--orange);font-weight:800;flex-shrink:0;margin-top:3px}
+.price-section{margin:1.8rem 0}
+.price-section-label{
+  font-family:'Archivo';font-weight:700;font-size:.72rem;letter-spacing:.28em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.price-section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+.price-cards{display:grid;gap:10px}
+.price-cards.col-1{grid-template-columns:1fr}
+.price-cards.col-2{grid-template-columns:1fr 1fr}
+.price-cards.col-3{grid-template-columns:1fr 1fr 1fr}
+.price-card{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+.price-card.hot{border-color:var(--orange);background:oklch(0.70 0.198 47 / .07)}
+.pc-label{font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:.4rem}
+.pc-name{font-family:'Anton';font-size:1rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:.3rem}
+.pc-amount{font-size:1.3rem;font-weight:800;color:var(--orange);margin-bottom:.3rem;line-height:1.2}
+.pc-amount small{font-size:.75rem;font-weight:600;color:var(--muted)}
+.pc-note{color:var(--muted);font-size:.82rem;margin:0;line-height:1.5}
+.pc-save{display:inline-block;background:oklch(0.70 0.198 47 / .18);color:var(--orange);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-top:.5rem}
+.addon-strip{
+  background:oklch(0.70 0.198 47 / .08);border:1px dashed oklch(0.70 0.198 47 / .4);
+  border-radius:6px;padding:18px 22px;
+  display:flex;justify-content:space-between;align-items:center;gap:1.2rem;flex-wrap:wrap;
+}
+.addon-strip h4{font-weight:700;font-size:.95rem;margin-bottom:.3rem}
+.addon-strip p{color:var(--muted);font-size:.85rem;margin:0}
+.addon-price{font-family:'Anton';font-size:1.4rem;color:var(--orange);white-space:nowrap;flex-shrink:0;text-align:right}
+.referral-strip{background:var(--bg-2);border:1px solid var(--line);border-radius:6px;padding:18px 22px;margin-top:1rem}
+.referral-strip h4{font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:.6rem}
+.referral-strip ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.referral-strip li{font-size:.86rem;color:var(--muted);display:flex;gap:.6rem}
+.referral-strip li::before{content:"→";color:var(--orange);flex-shrink:0}
+.svc-modal-footer{margin-top:2rem;padding-top:1.6rem;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.svc-modal-footer p{color:var(--muted);font-size:.86rem;max-width:34ch;margin:0}
+@media(max-width:600px){
+  .price-cards.col-2,.price-cards.col-3{grid-template-columns:1fr}
+  .addon-strip{flex-direction:column;align-items:flex-start}
+  .svc-modal-footer{flex-direction:column;align-items:stretch}
+  .svc-modal-footer .btn{justify-content:center}
+}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -401,7 +452,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   <div class="sec-head">
     <div>
       <span class="eyebrow rv">What I Offer</span>
-      <h2 class="display rv d1" style="margin-top:.6rem">Two Ways<br />To Train</h2>
+      <h2 class="display rv d1" style="margin-top:.6rem">Three Ways<br />To Train</h2>
     </div>
     <p class="rv d2">Whether you're in the city or across the globe, the standard never drops. Coaching built on accountability, structure and real results.</p>
   </div>
@@ -424,7 +475,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
         <li><span class="chk">»</span> Live form correction &amp; spotting</li>
         <li><span class="chk">»</span> Nutrition guidance &amp; weekly check-ins</li>
       </ul>
-      <button class="more open-modal" style="background:none;border:none;cursor:pointer;padding:0">Book a session <span class="arw">→</span></button>
+      <button class="more open-svc-modal" data-target="ptModal" style="background:none;border:none;cursor:pointer;padding:0">Details <span class="arw">→</span></button>
     </div>
 
     <div class="svc rv d2">
@@ -439,7 +490,22 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
         <li><span class="chk">»</span> Video form reviews &amp; messaging access</li>
         <li><span class="chk">»</span> Macro targets &amp; habit coaching</li>
       </ul>
-      <button class="more open-modal" style="background:none;border:none;cursor:pointer;padding:0">Apply now <span class="arw">→</span></button>
+      <button class="more open-svc-modal" data-target="onlineModal" style="background:none;border:none;cursor:pointer;padding:0">Details <span class="arw">→</span></button>
+    </div>
+
+    <div class="svc rv d3">
+      <div class="ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>
+      </div>
+      <h3>Move Better</h3>
+      <div class="price">Mobility · Flexibility · Recovery</div>
+      <p>Your joints have more range than you think. Structured mobility work that removes pain, prevents injury, and makes every session more effective.</p>
+      <ul>
+        <li><span class="chk">»</span> Personalized mobility assessment</li>
+        <li><span class="chk">»</span> Daily 15–30 min progressive routines</li>
+        <li><span class="chk">»</span> Corrective exercises &amp; recovery protocols</li>
+      </ul>
+      <button class="more open-svc-modal" data-target="moveModal" style="background:none;border:none;cursor:pointer;padding:0">Details <span class="arw">→</span></button>
     </div>
   </div>
 </section>
@@ -593,6 +659,199 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   </div>
 </div>
 
+<!-- PERSONAL TRAINING DETAIL MODAL -->
+<div class="modal-overlay" id="ptModal" role="dialog" aria-modal="true">
+  <div class="modal modal-lg">
+    <button class="modal-close" data-close="ptModal" aria-label="Close">✕</button>
+    <span class="eyebrow" style="margin-bottom:.8rem">1-on-1 · Kuala Lumpur</span>
+    <h3 class="display" style="margin-top:.6rem">Personal<br/><em style="font-style:normal;color:var(--orange)">Training</em></h3>
+    <p class="svc-modal-quote">"I don't sell sessions. I invest in your transformation — one rep, one week, one version of you at a time."</p>
+    <ul class="svc-modal-includes">
+      <li><span class="chk">»</span> Free initial assessment — your goals, your history, your real starting point</li>
+      <li><span class="chk">»</span> 100% personalized program, rebuilt every single week around your progress</li>
+      <li><span class="chk">»</span> Real-time technique correction — every rep watched, zero bad habits allowed</li>
+      <li><span class="chk">»</span> WhatsApp support between sessions — you're never stuck alone</li>
+      <li><span class="chk">»</span> Nutrition plan included in all monthly &amp; shared packages</li>
+    </ul>
+
+    <div class="price-section">
+      <div class="price-section-label">Drop-in</div>
+      <div class="price-cards col-1">
+        <div class="price-card">
+          <div class="pc-label">Single Session</div>
+          <div class="pc-amount">200 RM <small>/ session</small></div>
+          <p class="pc-note">Full flexibility, zero commitment. Try it once and feel the difference.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-section">
+      <div class="price-section-label">Credit Packs &nbsp;<span style="font-size:.68rem;color:var(--faint);letter-spacing:.04em;text-transform:none;font-weight:400">Valid 6 months · use at your own rhythm</span></div>
+      <div class="price-cards col-3">
+        <div class="price-card">
+          <div class="pc-name">Pack 10</div>
+          <div class="pc-amount">1,800 RM</div>
+          <p class="pc-note">180 RM / session</p>
+          <span class="pc-save">Save 10%</span>
+        </div>
+        <div class="price-card hot">
+          <div class="pc-name">Pack 20</div>
+          <div class="pc-amount">3,200 RM</div>
+          <p class="pc-note">160 RM / session</p>
+          <span class="pc-save">Save 20%</span>
+        </div>
+        <div class="price-card">
+          <div class="pc-name">Pack 30</div>
+          <div class="pc-amount">4,500 RM</div>
+          <p class="pc-note">150 RM / session</p>
+          <span class="pc-save">Save 25%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-section">
+      <div class="price-section-label">Monthly Packages &nbsp;<span style="font-size:.68rem;color:var(--faint);letter-spacing:.04em;text-transform:none;font-weight:400">Nutrition plan included</span></div>
+      <div class="price-cards col-3">
+        <div class="price-card">
+          <div class="pc-name">Starter</div>
+          <div class="pc-amount">1,400 RM <small>/ month</small></div>
+          <p class="pc-note">2 sessions / week<br/>8 sessions / month</p>
+        </div>
+        <div class="price-card hot">
+          <div class="pc-name">Momentum</div>
+          <div class="pc-amount">1,900 RM <small>/ month</small></div>
+          <p class="pc-note">3 sessions / week<br/>12 sessions / month</p>
+        </div>
+        <div class="price-card">
+          <div class="pc-name">Elite</div>
+          <div class="pc-amount">2,400 RM <small>/ month</small></div>
+          <p class="pc-note">4 sessions / week<br/>16 sessions / month</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-section">
+      <div class="price-section-label">Shared Packages &nbsp;<span style="font-size:.68rem;color:var(--faint);letter-spacing:.04em;text-transform:none;font-weight:400">Same program · individual adjustments · separate nutrition plans</span></div>
+      <div class="price-cards col-2">
+        <div class="price-card">
+          <div class="pc-name">Shared 2 Pax</div>
+          <div class="pc-amount">3,000 RM <small>/ month</small></div>
+          <p class="pc-note">3 sessions / week<br/>→ 1,500 RM per person</p>
+        </div>
+        <div class="price-card">
+          <div class="pc-name">Shared 3 Pax</div>
+          <div class="pc-amount">4,000 RM <small>/ month</small></div>
+          <p class="pc-note">3 sessions / week<br/>→ ~1,333 RM per person</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="referral-strip">
+      <h4>Referral Program</h4>
+      <ul>
+        <li>Bring a friend or family who joins any monthly or shared package → you get 1 free session</li>
+        <li>They purchase a Pack 20 or Pack 30 → you get 10% off your next renewal</li>
+      </ul>
+    </div>
+
+    <div class="svc-modal-footer">
+      <p>Final pricing confirmed after a free 15-min discovery call. Every situation is unique — you deserve a tailored proposal.</p>
+      <button class="btn btn-orange open-modal">Book a Free Call <span class="arw">→</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ONLINE COACHING DETAIL MODAL -->
+<div class="modal-overlay" id="onlineModal" role="dialog" aria-modal="true">
+  <div class="modal modal-lg">
+    <button class="modal-close" data-close="onlineModal" aria-label="Close">✕</button>
+    <span class="eyebrow" style="margin-bottom:.8rem">Remote · Worldwide</span>
+    <h3 class="display" style="margin-top:.6rem">Online<br/><em style="font-style:normal;color:var(--orange)">Coaching</em></h3>
+    <p class="svc-modal-quote">"The distance changes nothing. The programming is just as precise, the accountability just as real. You train anywhere — I'm with you every step."</p>
+    <ul class="svc-modal-includes">
+      <li><span class="chk">»</span> Fully personalized training program built around your life, your schedule, your goals</li>
+      <li><span class="chk">»</span> Weekly video check-in — we adjust, we progress, we never plateau</li>
+      <li><span class="chk">»</span> Unlimited WhatsApp or email support — response within 24 hours, always</li>
+      <li><span class="chk">»</span> App-based plan, revised every single week based on your real data</li>
+      <li><span class="chk">»</span> Metrics tracking — weight, performance, progress photos</li>
+    </ul>
+
+    <div class="price-section">
+      <div class="price-section-label">Choose Your Plan</div>
+      <div class="price-cards col-2">
+        <div class="price-card">
+          <div class="pc-name">Essential</div>
+          <div class="pc-amount">$120 USD <small>/ month</small></div>
+          <p class="pc-note">Custom training program + weekly check-in + WhatsApp/email support</p>
+        </div>
+        <div class="price-card hot">
+          <div class="pc-name">Performance</div>
+          <div class="pc-amount">$180 USD <small>/ month</small></div>
+          <p class="pc-note">Everything in Essential + bi-weekly adjustments + priority access to coach</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-section">
+      <div class="price-section-label">Optional Add-on</div>
+      <div class="addon-strip">
+        <div>
+          <h4>Nutrition Plan + Weekly Follow-up</h4>
+          <p>Full plan built around your goals, reviewed every week as you evolve. Training without nutrition is building on sand.</p>
+        </div>
+        <div class="addon-price">+$50 <small style="font-size:.7rem;font-family:'Archivo';font-weight:600;color:var(--muted);display:block">USD / month</small></div>
+      </div>
+    </div>
+
+    <div class="svc-modal-footer">
+      <p>Minimum 2-month commitment for real, measurable results. No gimmicks — just structure and discipline.</p>
+      <button class="btn btn-orange open-modal">Apply for Online Coaching <span class="arw">→</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- MOVE BETTER DETAIL MODAL -->
+<div class="modal-overlay" id="moveModal" role="dialog" aria-modal="true">
+  <div class="modal modal-lg">
+    <button class="modal-close" data-close="moveModal" aria-label="Close">✕</button>
+    <span class="eyebrow" style="margin-bottom:.8rem">Mobility · Flexibility · Recovery</span>
+    <h3 class="display" style="margin-top:.6rem">Move<br/><em style="font-style:normal;color:var(--orange)">Better</em></h3>
+    <p class="svc-modal-quote">"You don't realize how well your body can move — until the day you actually teach it to. Less pain, more range, better everything."</p>
+    <ul class="svc-modal-includes">
+      <li><span class="chk">»</span> Initial mobility assessment — shoulders, hips, spine, ankles</li>
+      <li><span class="chk">»</span> Weekly progressive routines (15–30 min/day, any equipment, anywhere)</li>
+      <li><span class="chk">»</span> Active recovery protocols tailored to your training load</li>
+      <li><span class="chk">»</span> Personalized corrective exercises based on your specific restrictions</li>
+      <li><span class="chk">»</span> WhatsApp support for real-time questions and adjustments</li>
+      <li><span class="chk">»</span> Works for everyone — complete beginners to seasoned CrossFit athletes</li>
+    </ul>
+
+    <div class="price-section">
+      <div class="price-section-label">Pricing</div>
+      <div class="price-cards col-2">
+        <div class="price-card">
+          <div class="pc-label">Standalone</div>
+          <div class="pc-name">Move Better</div>
+          <div class="pc-amount">$95 USD <small>/ month</small></div>
+          <p class="pc-note">Full program, coaching and support. Everything you need, nothing you don't.</p>
+        </div>
+        <div class="price-card hot">
+          <div class="pc-label">Bundle with Online or Personal Training</div>
+          <div class="pc-name">Special Price</div>
+          <div class="pc-amount">$55 USD <small>/ month</small></div>
+          <p class="pc-note">Combined with your main program. More complete results, less cost.</p>
+          <span class="pc-save">Save $40 / month</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="svc-modal-footer">
+      <p>This is the foundation most people skip — and the one that changes everything else.</p>
+      <button class="btn btn-orange open-modal">Start Moving Better <span class="arw">→</span></button>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="shell">
@@ -681,6 +940,7 @@ const modalMsg = document.getElementById('modalMsg');
 const submitBtn = document.getElementById('submitBtn');
 
 function openModal() {
+  ['ptModal','onlineModal','moveModal'].forEach(id => document.getElementById(id).classList.remove('open'));
   modalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -731,6 +991,15 @@ inquiryForm.addEventListener('submit', async (e) => {
     submitBtn.innerHTML = 'Send My Inquiry <span class="arw">→</span>';
   }
 });
+
+// service detail modals
+const svcModalIds = ['ptModal','onlineModal','moveModal'];
+function openSvcModal(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeSvcModal(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
+document.querySelectorAll('.open-svc-modal').forEach(el => el.addEventListener('click', () => openSvcModal(el.dataset.target)));
+document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => closeSvcModal(el.dataset.close)));
+svcModalIds.forEach(id => document.getElementById(id).addEventListener('click', e => { if (e.target === document.getElementById(id)) closeSvcModal(id); }));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') svcModalIds.forEach(closeSvcModal); });
 </script>
 </body>
 </html>
