@@ -973,7 +973,7 @@ inquiryForm.addEventListener('submit', async (e) => {
       inquiryForm.reset();
     } else {
       const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.detail || 'Server error');
+      throw new Error(errData.error || errData.detail || 'Server error');
     }
   } catch (err) {
     modalMsg.textContent = 'Error: ' + (err.message || 'Unknown error');
