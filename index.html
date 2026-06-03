@@ -466,7 +466,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   <div class="svc-grid">
     <div class="svc rv d1">
       <div class="svc-img">
-        <img src="https://images.unsplash.com/photo-VJCKxTvb2ok?auto=format&fit=crop&w=800&q=80" alt="Personal Training KL" />
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80" alt="Personal Training KL" />
       </div>
       <div class="svc-body">
         <span class="eyebrow-svc">1-on-1 · Kuala Lumpur</span>
@@ -478,7 +478,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
 
     <div class="svc rv d2">
       <div class="svc-img">
-        <img src="https://images.unsplash.com/photo-hbVTGkDTYh8?auto=format&fit=crop&w=800&q=80" alt="Online Coaching" />
+        <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=800&q=80" alt="Online Coaching" />
       </div>
       <div class="svc-body">
         <span class="eyebrow-svc">Remote · Worldwide</span>
@@ -888,8 +888,9 @@ addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40),
 // reveal on scroll
 const io = new IntersectionObserver((es) => {
   es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: .16 });
+}, { threshold: .05 });
 document.querySelectorAll('.rv:not(.in)').forEach(el => io.observe(el));
+setTimeout(() => document.querySelectorAll('.rv:not(.in)').forEach(el => el.classList.add('in')), 1200);
 
 // count-up stats
 const counters = document.querySelectorAll('[data-count]');
