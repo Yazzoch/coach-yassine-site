@@ -96,8 +96,19 @@ section{position:relative}
   flex-direction:column;align-items:center;justify-content:center;gap:2.4rem;
 }
 .mobile-menu.open{display:flex}
-.mobile-menu a{font-family:'Anton';font-size:2.4rem;text-transform:uppercase;letter-spacing:.04em;color:var(--text);transition:color .2s}
-.mobile-menu a:hover{color:var(--orange)}
+.mobile-menu a{
+  font-family:'Anton';font-size:2.4rem;text-transform:uppercase;letter-spacing:.04em;
+  color:var(--text);transition:color .2s,transform .2s;
+  position:relative;display:inline-block;
+}
+.mobile-menu a::after{
+  content:"";position:absolute;left:0;bottom:-6px;
+  height:3px;width:0;background:var(--orange);
+  transition:width .25s cubic-bezier(.2,.8,.2,1);
+  border-radius:2px;
+}
+.mobile-menu a:hover{color:var(--orange);transform:translateX(6px)}
+.mobile-menu a:hover::after{width:100%}
 .mobile-close{position:absolute;top:22px;right:22px;background:none;border:none;color:var(--muted);font-size:1.8rem;cursor:pointer;line-height:1;padding:8px}
 
 /* burger active state */
@@ -168,7 +179,7 @@ section{position:relative}
 .sec{padding:120px 0}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:3rem;margin-bottom:60px}
 .sec-head h2{font-size:clamp(2.4rem,5vw,4.6rem);max-width:16ch}
-.sec-head p{color:var(--muted);max-width:38ch;font-size:1.02rem}
+.sec-head p{color:var(--text);max-width:38ch;font-size:1.18rem;line-height:1.75;font-weight:500}
 .idx{font-family:'Anton';font-size:1rem;color:var(--faint);letter-spacing:.2em}
 
 /* section image band */
@@ -396,8 +407,14 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   .tst-grid{grid-template-columns:1fr}
   .hero-meta{display:none}
   .hero-portrait{display:none}
-  .hero h1{margin-bottom:1.1rem}
+  /* hero mobile */
+  .hero h1{font-size:clamp(2.6rem,10vw,3.4rem);margin-bottom:.9rem;max-width:100%}
+  .hero p.sub{font-size:.95rem;max-width:100%;margin-bottom:1.6rem;line-height:1.6;color:var(--muted)}
+  .hero p.sub .hero-sub-extra{display:none}
+  .hero-actions .btn-ghost.open-modal{display:none}
   .about-photo .tag{left:14px}
+  /* sec-head mobile: keep paragraph readable */
+  .sec-head p{font-size:1rem}
 }
 @media(max-width:480px){
   .stats{grid-template-columns:1fr}
@@ -443,7 +460,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   <div class="hero-inner shell">
     <span class="eyebrow rv in">Personal Training · Online Coaching</span>
     <h1 class="display rv in d1">I've Coached People Who<em>Gave Up Before Finding Me.</em></h1>
-    <p class="sub rv in d2">If you're ready to stop wasting time — I'm ready to build something real with you. <b>Coaching from KL to everywhere.</b> Programs that change when you change — not when the calendar says so.</p>
+    <p class="sub rv in d2">If you're ready to stop wasting time — I'm ready to build something real with you. <b>Coaching from KL to everywhere.</b><span class="hero-sub-extra"> Programs that change when you change — not when the calendar says so.</span></p>
     <div class="hero-actions rv in d3">
       <a href="#start" class="btn btn-orange">Start Training <span class="arw">→</span></a>
       <a href="#services" class="btn btn-ghost">View Services</a>
