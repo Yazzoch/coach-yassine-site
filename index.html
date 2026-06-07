@@ -127,11 +127,26 @@ section{position:relative}
     linear-gradient(to bottom, oklch(0.12 0.004 50 / .55) 0%, transparent 30%);
 }
 .hero-inner{position:relative;z-index:2;width:100%;padding-bottom:7vh}
-.hero h1{font-size:clamp(3.6rem,11vw,11.5rem);margin:.7rem 0 1.4rem;max-width:14ch}
+.hero h1{font-size:clamp(2.5rem,3.8vw,4.8rem);margin:.6rem 0 1.1rem;max-width:22ch}
 .hero h1 em{font-style:normal;color:var(--orange);display:block}
-.hero p.sub{font-size:clamp(1.05rem,1.6vw,1.35rem);color:var(--text);font-weight:500;max-width:34ch;margin-bottom:2.2rem}
-.hero p.sub b{color:var(--orange);font-weight:700}
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.hero p.sub{font-size:clamp(.95rem,1.3vw,1.12rem);color:var(--muted);font-weight:500;max-width:38ch;margin-bottom:1.8rem}
+.hero p.sub b{color:var(--text);font-weight:700}
+.hero-actions{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center}
+/* prime teaser */
+.prime-teaser{
+  display:inline-flex;align-items:center;gap:.55rem;flex-wrap:wrap;
+  background:none;border:none;border-bottom:1px solid transparent;
+  cursor:pointer;padding:9px 0;margin-top:.8rem;
+  color:var(--muted);font-size:.8rem;font-weight:600;font-family:'Archivo',sans-serif;
+  letter-spacing:.02em;transition:color .2s,border-color .2s;
+}
+.prime-teaser:hover{color:var(--orange);border-bottom-color:oklch(0.70 0.198 47/.25)}
+.pt-badge{
+  background:oklch(0.70 0.198 47/.14);color:var(--orange);
+  font-size:.6rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;
+  padding:3px 9px;border-radius:3px;border:1px solid oklch(0.70 0.198 47/.3);flex-shrink:0;
+}
+.pt-dot{color:var(--faint);margin:0 .05rem}
 .hero-meta{position:absolute;right:40px;bottom:7vh;z-index:2;text-align:right;font-weight:600;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;display:flex;gap:1.4rem;align-items:center}
 .hero-meta .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);writing-mode:horizontal-tb}
 .scroll-hint{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:2;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);display:flex;flex-direction:column;align-items:center;gap:8px}
@@ -383,10 +398,64 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   .svc-modal-footer .btn{justify-content:center}
 }
 
+/* ---------- Project Prime ---------- */
+.prime-section{background:var(--bg-2);padding:0 0 100px}
+.prime-banner{
+  background:var(--orange);color:#1a0e04;text-align:center;
+  padding:14px 20px;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;
+}
+.prime-card{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  background:var(--card);border-radius:10px;overflow:hidden;
+  margin-top:60px;border:1px solid var(--line);border-left:4px solid var(--orange);
+}
+.prime-left{padding:52px 48px;border-right:1px solid var(--line)}
+.prime-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:oklch(0.70 0.198 47 / .12);color:var(--orange);
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:.68rem;
+  letter-spacing:.28em;text-transform:uppercase;padding:5px 12px;
+  border-radius:3px;border:1px solid oklch(0.70 0.198 47 / .3);margin-bottom:1.4rem;
+}
+.prime-badge::before{content:"★";font-size:.7rem}
+.prime-title{font-size:clamp(3.2rem,6vw,6rem);line-height:.9;margin-bottom:.8rem}
+.prime-title em{display:block;color:var(--orange);font-style:normal}
+.prime-tagline{font-size:1rem;color:var(--muted);font-style:italic;margin-bottom:.3rem}
+.prime-subtitle{font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:2rem}
+.prime-includes{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.prime-includes li{display:flex;gap:.7rem;font-size:.95rem;color:var(--text);align-items:flex-start}
+.prime-right{padding:52px 48px;display:flex;flex-direction:column}
+.prime-value{font-size:.85rem;color:var(--faint);margin-bottom:.35rem}
+.prime-value s{opacity:.7}
+.prime-price{font-family:'Anton',sans-serif;font-size:clamp(3.5rem,6vw,5.5rem);color:var(--orange);line-height:1;margin-bottom:.25rem}
+.prime-price sup{font-size:1.8rem;vertical-align:top;margin-top:.5rem;opacity:.8}
+.prime-duration{font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.6rem}
+.prime-divider{height:1px;background:var(--line);margin-bottom:1.2rem}
+.prime-installment{font-size:.95rem;color:var(--muted);margin-bottom:1.8rem}
+.prime-installment strong{color:var(--text)}
+.prime-trial{
+  background:oklch(0.70 0.198 47 / .05);
+  border:1px dashed oklch(0.70 0.198 47 / .4);
+  border-radius:6px;padding:18px 20px;margin-bottom:2rem;
+}
+.prime-trial-label{font-size:.78rem;color:var(--muted);margin-bottom:.4rem}
+.prime-trial-offer{font-weight:800;font-size:1rem;color:var(--text);margin-bottom:.4rem;letter-spacing:.01em}
+.prime-trial-offer span{color:var(--orange)}
+.prime-trial p{font-size:.8rem;color:var(--faint);margin:0;line-height:1.5}
+.prime-ctas{display:flex;gap:.8rem;flex-wrap:wrap}
+@media(max-width:900px){
+  .prime-card{grid-template-columns:1fr}
+  .prime-left{padding:36px 24px;border-right:none;border-bottom:1px solid var(--line)}
+  .prime-right{padding:36px 24px}
+  .prime-ctas{flex-direction:column}
+  .prime-ctas .btn{justify-content:center}
+}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
-.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.34s}
 
 /* responsive */
 @media(max-width:1024px){
@@ -407,10 +476,9 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   .hero-meta{display:none}
   .hero-portrait{display:none}
   /* hero mobile */
-  .hero h1{font-size:clamp(2.6rem,10vw,3.4rem);margin-bottom:.9rem;max-width:100%}
-  .hero p.sub{font-size:.95rem;max-width:100%;margin-bottom:1.6rem;line-height:1.6;color:var(--muted)}
-  .hero p.sub .hero-sub-extra{display:none}
-  .hero-actions .btn-ghost.open-modal{display:none}
+  .hero h1{font-size:clamp(2.2rem,8vw,3rem);margin-bottom:.8rem;max-width:100%}
+  .hero p.sub{font-size:.92rem;max-width:100%;margin-bottom:1.4rem;line-height:1.6}
+  .prime-teaser{font-size:.75rem;gap:.4rem}
   .about-photo .tag{left:14px}
   /* sec-head mobile: keep paragraph readable */
   .sec-head p{font-size:1rem}
@@ -459,14 +527,21 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
   <image-slot id="hero-bg" fit="cover" src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=1920&q=80&auto=format&fit=crop" placeholder="Drop cinematic gym / athlete shot (landscape)"></image-slot>
   <div class="scrim"></div>
   <div class="hero-inner shell">
-    <span class="eyebrow rv in">Personal Training · Online Coaching</span>
+    <span class="eyebrow rv in">Personal Training · Online Coaching · KL</span>
     <h1 class="display rv in d1">I've Coached People Who<em>Gave Up Before Finding Me.</em></h1>
-    <p class="sub rv in d2">If you're ready to stop wasting time, I'm ready to build something real with you. <b>Coaching from KL to everywhere.</b><span class="hero-sub-extra"> Programs that change when you change, not when the calendar says so.</span></p>
+    <p class="sub rv in d2">If you're ready to stop wasting time, I'm ready to build something real. <b>Coaching from KL to everywhere.</b></p>
     <div class="hero-actions rv in d3">
-      <a href="#start" class="btn btn-orange">Start Training <span class="arw">→</span></a>
+      <button class="btn btn-orange open-modal">Start Training <span class="arw">→</span></button>
       <a href="#services" class="btn btn-ghost">View Services</a>
-      <button class="btn btn-ghost open-modal">Learn More <span class="arw">→</span></button>
     </div>
+    <button class="prime-teaser rv in d4 open-svc-modal" data-target="primeModal">
+      <span class="pt-badge">★ PROJECT PRIME</span>
+      <span class="pt-dot">·</span>
+      The 6-month full transformation
+      <span class="pt-dot">·</span>
+      5 spots left
+      <span class="arw">→</span>
+    </button>
   </div>
   <figure class="hero-portrait rv in d2">
     <image-slot id="hero-portrait" fit="cover" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80&auto=format&fit=crop" placeholder="Drop your professional photo here"></image-slot>
@@ -715,6 +790,45 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
         Send My Inquiry <span class="arw">→</span>
       </button>
     </form>
+  </div>
+</div>
+
+<!-- PROJECT PRIME MODAL -->
+<div class="modal-overlay" id="primeModal" role="dialog" aria-modal="true">
+  <div class="modal modal-lg">
+    <button class="modal-close" data-close="primeModal" aria-label="Close">✕</button>
+    <span class="eyebrow" style="margin-bottom:.8rem">Best Seller · 5 Spots Only</span>
+    <h3 class="display" style="margin-top:.6rem">PROJECT<br/><em style="font-style:normal;color:var(--orange)">PRIME</em></h3>
+    <p class="svc-modal-quote">"Not a program. A commitment. Six months of full coaching — training, nutrition, recovery, and a coach who actually shows up. This is the most complete thing I offer."</p>
+    <p style="font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:1.4rem">The 6-Month Full Transformation</p>
+    <ul class="svc-modal-includes">
+      <li><span class="chk">»</span> 3 sessions / week — in-person KL or online</li>
+      <li><span class="chk">»</span> Custom weekly programming, revised every week</li>
+      <li><span class="chk">»</span> Full nutrition plan + weekly adjustments</li>
+      <li><span class="chk">»</span> Mobility &amp; recovery protocol integrated</li>
+      <li><span class="chk">»</span> Daily WhatsApp access to your coach</li>
+      <li><span class="chk">»</span> Centralized online platform — plan, metrics, check-ins</li>
+      <li><span class="chk">»</span> Bi-monthly progress review with coach</li>
+    </ul>
+    <div class="price-section">
+      <div class="price-section-label">Investment</div>
+      <div class="price-cards col-1">
+        <div class="price-card hot">
+          <div class="pc-label">All-inclusive · 6 months</div>
+          <div class="pc-amount">9,800 RM <small>/ program</small></div>
+          <p class="pc-note">Valued at 13,200 RM &nbsp;·&nbsp; or 5,200 RM × 2 installments at month 1 and month 3</p>
+        </div>
+      </div>
+    </div>
+    <div class="prime-trial" style="margin-top:1.4rem">
+      <div class="prime-trial-label">Not ready to commit yet?</div>
+      <div class="prime-trial-offer">→ 2-WEEK TRIAL &nbsp;<span>950 RM</span></div>
+      <p>Fully deductible if you join Project Prime within 7 days of your trial ending.</p>
+    </div>
+    <div class="svc-modal-footer">
+      <p>5 spots available. Each client gets my full attention — that's the limit.</p>
+      <button class="btn btn-orange open-modal">Apply for Prime <span class="arw">→</span></button>
+    </div>
   </div>
 </div>
 
@@ -1000,7 +1114,7 @@ const modalMsg = document.getElementById('modalMsg');
 const submitBtn = document.getElementById('submitBtn');
 
 function openModal() {
-  ['ptModal','onlineModal','moveModal'].forEach(id => document.getElementById(id).classList.remove('open'));
+  ['ptModal','onlineModal','moveModal','primeModal'].forEach(id => document.getElementById(id).classList.remove('open'));
   modalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1053,7 +1167,7 @@ inquiryForm.addEventListener('submit', async (e) => {
 });
 
 // service detail modals
-const svcModalIds = ['ptModal','onlineModal','moveModal'];
+const svcModalIds = ['ptModal','onlineModal','moveModal','primeModal'];
 function openSvcModal(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow = 'hidden'; }
 function closeSvcModal(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow = ''; }
 document.querySelectorAll('.open-svc-modal').forEach(el => el.addEventListener('click', () => openSvcModal(el.dataset.target)));
