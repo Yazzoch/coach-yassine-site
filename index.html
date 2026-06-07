@@ -120,6 +120,7 @@ section{position:relative}
 /* ---------- hero ---------- */
 .hero{height:100vh;min-height:680px;position:relative;display:flex;align-items:flex-end;overflow:hidden}
 .hero image-slot{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero image-slot img{object-position:center 20%}
 .hero .scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
     linear-gradient(to top, var(--bg) 2%, transparent 42%),
@@ -524,7 +525,7 @@ footer{background:var(--bg);border-top:1px solid var(--line);padding:60px 0 40px
 
 <!-- HERO -->
 <header class="hero" id="top">
-  <image-slot id="hero-bg" fit="cover" src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=1920&q=80&auto=format&fit=crop" placeholder="Drop cinematic gym / athlete shot (landscape)"></image-slot>
+  <image-slot id="hero-bg" fit="cover" src="hero-yassine.jpg" placeholder="Drop cinematic gym / athlete shot (landscape)"></image-slot>
   <div class="scrim"></div>
   <div class="hero-inner shell">
     <span class="eyebrow rv in">Personal Training · Online Coaching · KL</span>
